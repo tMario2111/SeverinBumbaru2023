@@ -3,16 +3,15 @@
 MainMenuState::MainMenuState(Game& game) :
     game{ game }
 {
-
+    
 }
 
 void MainMenuState::update()
 {
-
+    game.states.push<GameState>(game);
 }
 
 void MainMenuState::render()
 {
-    sf::RectangleShape rect{ sf::Vector2f{ 200.f, 200.f } };
-    game.win.draw(rect);
+
 }

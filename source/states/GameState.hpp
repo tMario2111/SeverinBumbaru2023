@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameState.hpp"
+#include "../Map.hpp"
 
 #include "../core/Game.hpp"
 
@@ -10,13 +10,14 @@
 
 class Game;
 
-class MainMenuState : public mke::State
+class GameState : public mke::State
 {
 public:
-    MainMenuState(Game& game);
+    GameState(Game& game);
 
     void update() override;
     void render() override;
 private:
     Game& game;
+    Map map;
 };

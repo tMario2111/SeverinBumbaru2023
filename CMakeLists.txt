@@ -10,10 +10,16 @@ add_executable(SeverinBumbaru2023 main.cpp
     source/core/Game.hpp source/core/Game.cpp
 
     #mke
-    source/mke/State.hpp source/mke/StateMachine.hpp
+    source/MKE/State.hpp source/MKE/StateMachine.hpp
+    source/MKE/AssetManager.hpp source/MKE/AssetManager.cpp
+    source/MKE/Input.hpp source/MKE/Input.cpp
 
     #states
     source/states/MainMenuState.hpp source/states/MainMenuState.cpp
+    source/states/GameState.hpp source/states/GameState.cpp
+
+    #map
+    source/Map.hpp source/Map.cpp
 )
 
 find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)

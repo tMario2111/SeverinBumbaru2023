@@ -2,6 +2,8 @@
 
 #include "../states/MainMenuState.hpp"
 
+#include "../MKE/AssetManager.hpp"
+#include "../MKE/Input.hpp"
 #include "../MKE/StateMachine.hpp"
 
 #include <SFML/Graphics.hpp>
@@ -13,11 +15,14 @@ public:
 
     sf::RenderWindow win;
     sf::Time dt;
+    mke::AssetManager assets;
+    mke::Input input;
     mke::StateMachine<> states;
 private:
     sf::Clock win_clock;
 
     void setupWin();
+    void loadAssets();
     void setupStates();
     void winEvents();
     void run();
