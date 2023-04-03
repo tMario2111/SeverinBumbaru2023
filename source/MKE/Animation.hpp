@@ -1,9 +1,9 @@
 #pragma once
 
-#include "AssetManager.hpp"
-
 #include <nlohmann/json.hpp>
 #include <SFML/Graphics.hpp>
+
+#include "AssetManager.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -12,101 +12,33 @@
 
 namespace mke
 {
-	/**
-	 * @brief A class that manages sprite animations
-	 * 
-	 */
 	class Animation
 	{
 	public:
-
-		/**
-		 * @brief Construct a new Animation object
-		 * 
-		 */
-		Animation() = default;
-
-		/**
-		 * @brief Set the Sprite object
-		 * 
-		 * @param sprite 
-		 */
-		void setSprite(sf::Sprite& sprite);
-
-		/**
-		 * @brief Set the Atlas object
-		 * 
-		 * @param atlas 
-		 */
+		Animation(sf::Sprite& sprite);
 		void setAtlas(mke::AssetManager::AtlasContent& atlas);
-
-		/**
-		 * @brief Load an animation from a json file
-		 * 
-		 * @param filename 
-		 */
 		void loadFromFile(const std::string& filename);
-
-		/**
-		 * @brief Load an animation from a json object
-		 * 
-		 * @param json 
-		 */
 		void loadFromJson(const nlohmann::json& json);
-
-		/**
-		 * @brief Add a new frame
-		 * 
-		 * @param frame_name (the one defined in the json)
-		 * @param duration 
-		 */
 		void addFrame(const std::string& frame_name, sf::Time duration);
-
-		/**
-		 * @brief Set the sprite frame manually (useful if animation is not running)
-		 * 
-		 * @param frame_name 
-		 */
 		void setSpriteFrame(const std::string& frame_name);
-
-		/**
-		 * @brief Set the sprite frame manually (useful if animation is not running)
-		 * 
-		 * @param index 
-		 */
 		void setSpriteFrame(unsigned int index);
-
-		/**
-		 * @brief Reset the animation
-		 * 
-		 */
 		void reset();
-
-		/**
-		 * @brief Run the animation
-		 * 
-		 * @param dt 
-		 */
 		void run(const sf::Time dt);
-
-		/**
-		 * @brief Get the number of loops that the animation went through
-		 * 
-		 * @return unsigned int 
-		 */
 		unsigned int getLoopCount();
-
+		void setReversed(bool reversed);
+        
 	private:
-		sf::Sprite* sprite = nullptr;
+		sf::Sprite& sprite;
 		mke::AssetManager::AtlasContent* atlas = nullptr;
-		sf::Time clock = sf::Time::Zero;
+		sf::Time clock = sf::seconds(0.f);
+		bool reversed = false;
 		struct Frame
 		{
-			sf::IntRect rect;
+			std::string name;
 			sf::Time duration;
 		};
 		std::vector<Frame> frames;
-		unsigned int frames_index = 0;
+		int frames_index = 0;
 		unsigned int loops = 0;
 	};
 }

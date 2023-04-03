@@ -1,0 +1,36 @@
+{
+    "animations": {
+        "idle": {
+            "frames": [
+                {
+                    "name": "Steve1",
+                    "duration": 0.1
+                },
+                {
+                    "name": "Steve2",
+                    "duration": 0.1
+                },
+                {
+                    "name": "Steve3",
+                    "duration": 0.1
+                },
+                {
+                    "name": "Steve4",
+                    "duration": 0.1
+                },
+                {
+                    "name": "Steve5",
+                    "duration": 0.1
+                },
+                {
+                    "name": "Steve6",
+                    "duration": 0.1
+                },
+                {
+                    "name": "Steve7",
+                    "duration": 0.1
+                }
+            ]
+        }
+    }
+}

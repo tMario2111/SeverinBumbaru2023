@@ -9,9 +9,21 @@ namespace SPlayer
         const auto entity = registry.create();
 
         registry.emplace<CPlayer::Base>(entity);
+
+        auto& animated_sprite = registry.emplace<CCore::AnimatedSprite>(entity);
+        animated_sprite.sprite = std::make_unique<sf::Sprite>();
+
+        animated_sprite.animations = std::make_unique<CCore::AnimationMap>();
+        auto& animations = *animated_sprite.animations;
+        SCore::loadAnimationsFromJson(game, *animated_sprite.sprite, animations, game.data["player"]["animations"]);
+        animations["idle"]->setSpriteFrame("Steve1");
+
+        auto& sprite = animated_sprite.sprite;
+        sprite->setScale(4.f, 4.f); // HARDCODE
+        sprite->setOrigin(sprite->getLocalBounds().width / 2.f, sprite->getLocalBounds().height / 2.f);
         
         auto& movement = registry.emplace<CPlayer::Movement>(entity);
-        movement.movement_speed = 500.f;
+        movement.movement_speed = 500.f; // HARDCODE
     }
 
     void update(Game& game, GameState& game_state)
@@ -19,16 +31,29 @@ namespace SPlayer
         movement(game, game_state);
     }
 
+    void drawToBatch(Game& game, GameState& game_state, mke::SpriteBatch& batch)
+    {
+        auto& registry = game_state.registry;
+
+        auto view = registry.view<CPlayer::Base, CCore::AnimatedSprite>();
+        for (const auto entity : view)
+        {
+            batch.append(*view.get<CCore::AnimatedSprite>(entity).sprite);
+        }
+    }
+
     void movement(Game& game, GameState& game_state)
     {
         auto& registry = game_state.registry;
 
-        auto view = registry.view<CPlayer::Base, CPlayer::Movement>();
+        auto view = registry.view<CPlayer::Base, CPlayer::Movement, CCore::AnimatedSprite>();
         for (const auto entity : view)
         {
             auto& movement = view.get<CPlayer::Movement>(entity);
             const auto movement_speed = movement.movement_speed;
             auto& position = movement.position;
+            auto& animations = *view.get<CCore::AnimatedSprite>(entity).animations;
+            auto& sprite = *view.get<CCore::AnimatedSprite>(entity).sprite;
 
             sf::Vector2f velocity{};
 
@@ -47,7 +72,11 @@ namespace SPlayer
                 velocity.y /= mke::SQRT2;
             }
 
+            animations["idle"]->run(game.dt);
+
             position += velocity;
+
+            sprite.setPosition(position);
 
             auto view = game.win.getView();
             view.setCenter(position);

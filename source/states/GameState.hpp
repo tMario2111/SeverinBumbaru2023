@@ -6,6 +6,7 @@
 
 #include "../core/Game.hpp"
 #include "../MKE/State.hpp"
+#include "../MKE/SpriteBatch.hpp"
 
 #include <entt/entt.hpp>
 
@@ -25,4 +26,7 @@ public:
     void render() override;
 private:
     Map map;
+    mke::SpriteBatch batch;
+
+    void updateBatch();
 };

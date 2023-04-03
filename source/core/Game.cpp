@@ -23,6 +23,7 @@ void Game::loadAssets()
 {
     assets.loadTexture("background", "assets/background.png");
     assets.getTexture("background").setRepeated(true);
+    assets.loadAtlas("atlas", "assets/atlas.png");
 }
 
 void Game::setupStates()
