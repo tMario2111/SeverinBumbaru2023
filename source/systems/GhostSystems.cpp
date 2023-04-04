@@ -41,7 +41,8 @@ namespace SGhost
                 game.win.draw(text);
         }
 
-        game.win.draw(game_state.arrow);
+        if (!game_state.arrow_hidden)
+            game.win.draw(game_state.arrow);
     }
 
     void create(Game& game, GameState& game_state, int i)
@@ -287,5 +288,10 @@ namespace SGhost
             game_state.arrow.setRotation(270.f);
         */
         game_state.arrow.setPosition(player_position.x, player_position.y - 75.f);
+
+        if (mke::squaredDistance(ghost_position, player_position) <= mke::pow2(1200.f))
+            game_state.arrow_hidden = true;
+        else
+            game_state.arrow_hidden = false;
     }
 }

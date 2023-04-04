@@ -31,6 +31,7 @@ public:
     HUD hud;
     sf::Time timer = sf::seconds(60.f);
     sf::Sprite arrow;
+    bool arrow_hidden = false;
 
     bool game_over = false;
 
