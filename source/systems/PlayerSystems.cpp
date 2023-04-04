@@ -8,7 +8,7 @@ namespace SPlayer
 
         const auto entity = registry.create();
 
-        registry.emplace<CPlayer::Base>(entity);
+        registry.emplace<CPlayer::Base>(entity).score = 0;
 
         auto& animated_sprite = registry.emplace<CCore::AnimatedSprite>(entity);
         animated_sprite.sprite = std::make_unique<sf::Sprite>();

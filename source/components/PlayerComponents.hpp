@@ -4,7 +4,10 @@
 
 namespace CPlayer
 {
-    struct Base {};
+    struct Base
+    {
+        int score;
+    };
 
     struct Movement
     {

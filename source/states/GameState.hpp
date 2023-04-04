@@ -2,6 +2,7 @@
 
 #include "../Map.hpp"
 #include "../Fibonacci.hpp"
+#include "../HUD.hpp"
 
 #include "../systems/PlayerSystems.hpp"
 #include "../systems/GhostSystems.hpp"
@@ -25,6 +26,7 @@ public:
     entt::registry registry;
     Map map;
     Fibonacci fibonacci;
+    HUD hud;
 
     void update() override;
     void render() override;

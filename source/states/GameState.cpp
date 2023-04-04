@@ -2,9 +2,11 @@
 
 GameState::GameState(Game& game) :
     game{ game },
-    map{ game.assets }
+    map{ game.assets },
+    hud{ game.win, game.assets, fibonacci }
 {
     SPlayer::create(game, *this);
+    hud.setScore(0);
 
     // Ghost spawn
     SGhost::spawn(game, *this);
@@ -31,4 +33,5 @@ void GameState::render()
     game.win.draw(map);
     game.win.draw(batch, &game.assets.getAtlasTexture("atlas"));
     SGhost::render(game, *this);
+    hud.render();
 }

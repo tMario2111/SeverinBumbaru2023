@@ -25,6 +25,7 @@ add_executable(SeverinBumbaru2023 main.cpp
 
     #map
     source/Map.hpp source/Map.cpp
+    source/HUD.hpp source/HUD.cpp
 
     #fibo
     source/Fibonacci.hpp source/Fibonacci.cpp
