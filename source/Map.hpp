@@ -22,6 +22,8 @@ private:
     mke::AssetManager& assets;
 
     sf::VertexArray background;
+    sf::VertexArray border;
 
     void setupBackground();
+    void setupBorder();
 };

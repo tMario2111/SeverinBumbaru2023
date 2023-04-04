@@ -50,7 +50,7 @@ namespace SGhost
         auto& tag = registry.emplace<CGhost::Tag>(entity);
         tag.k = i;
         tag.text.setFont(game.assets.getFont("font"));
-        tag.text.setCharacterSize(20);
+        tag.text.setCharacterSize(22);
         if (i % 2 == 0)
             tag.text.setString(mke::addCommasToNumber(std::to_string(game_state.fibonacci.seq[i / 2])));
         else
