@@ -22,4 +22,6 @@ private:
     Fibonacci& fibonacci;
 
     sf::Text sequence;
+    sf::Text score;
+    sf::Text timer;
 };

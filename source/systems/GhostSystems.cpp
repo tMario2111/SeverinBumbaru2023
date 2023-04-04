@@ -11,6 +11,7 @@ namespace SGhost
     void update(Game& game, GameState& game_state)
     {
         movement(game, game_state);
+        catchGhost(game, game_state);
     }
 
     void drawToBatch(Game& game, GameState& game_state, mke::SpriteBatch& batch)
@@ -52,10 +53,9 @@ namespace SGhost
         tag.text.setFont(game.assets.getFont("font"));
         tag.text.setCharacterSize(22);
         if (i % 2 == 0)
-            tag.text.setString(mke::addCommasToNumber(std::to_string(game_state.fibonacci.seq[i / 2])));
+            tag.text.setString(std::to_string(game_state.fibonacci.seq[i / 2]));
         else
-            tag.text.setString(mke::addCommasToNumber(std::to_string(game_state.fibonacci.seq[i / 2] + 
-                game.random.getInt<int>(-10, 10))));
+            tag.text.setString(std::to_string(game.random.getInt<unsigned long long>(100, 10000000)));
         tag.text.setOrigin(tag.text.getLocalBounds().width / 2.f, tag.text.getLocalBounds().height / 2.f);
 
         auto& animated_sprite = registry.emplace<CCore::AnimatedSprite>(entity);
@@ -133,7 +133,7 @@ namespace SGhost
                     sprite.setScale(-fabsf(sprite.getScale().x), sprite.getScale().y);
                 else
                     sprite.setScale(+fabsf(sprite.getScale().x), sprite.getScale().y);
-                if (mke::squaredDistance(sprite.getPosition(), movement.target) <= 5.f)
+                if (mke::squaredDistance(sprite.getPosition(), movement.target) <= 25.f)
                 {
                     movement.state = CGhost::Movement::State::Waiting;
                     movement.delay = sf::seconds(game.random.getReal<float>(movement.min_wait_time.asSeconds(), 
@@ -162,6 +162,32 @@ namespace SGhost
             }
 
             text.setPosition(sprite.getPosition().x, sprite.getPosition().y - 40.f);
+        }
+    }
+#include <iostream>
+    void catchGhost(Game& game, GameState& game_state)
+    {
+        auto& registry = game_state.registry;
+
+        if (!game.input.isMouseButtonPressed(sf::Mouse::Left))
+            return;
+
+        const auto mouse_pos = game.win.mapPixelToCoords(sf::Mouse::getPosition(game.win));
+        auto view = game_state.registry.view<CGhost::Base, CCore::AnimatedSprite, CGhost::Tag>();
+        for (const auto entity : view)
+        {
+            auto& sprite = *view.get<CCore::AnimatedSprite>(entity).sprite;
+            auto& tag = view.get<CGhost::Tag>(entity);
+
+            if (sprite.getGlobalBounds().contains(mouse_pos))
+            {
+                if (tag.k % 2 == 0 && tag.k / 2 == SPlayer::getScore(game, game_state) + 3)
+                {
+                    SPlayer::incrementScore(game, game_state);
+                    tag.text.setString(std::to_string(game.random.getInt<unsigned long long>(1000, 1000000)));
+                    create(game, game_state, 99);
+                }
+            }
         }
     }
 }

@@ -43,6 +43,21 @@ namespace SPlayer
         }
     }
 
+    int getScore(Game& game, GameState& game_state)
+    {
+        auto view = game_state.registry.view<CPlayer::Base>();
+        for (const auto entity : view)
+            return view.get<CPlayer::Base>(entity).score;
+        return 0;
+    }
+
+    void incrementScore(Game& game, GameState& game_state)
+    {
+        auto view = game_state.registry.view<CPlayer::Base>();
+        for (const auto entity : view)
+            view.get<CPlayer::Base>(entity).score++;
+    }
+
     void movement(Game& game, GameState& game_state)
     {
         auto& registry = game_state.registry;
@@ -51,10 +66,14 @@ namespace SPlayer
         for (const auto entity : view)
         {
             auto& movement = view.get<CPlayer::Movement>(entity);
-            const auto movement_speed = movement.movement_speed;
+            const auto default_movement_speed = movement.movement_speed;
+            auto movement_speed = default_movement_speed;
             auto& position = movement.position;
             auto& animations = *view.get<CCore::AnimatedSprite>(entity).animations;
             auto& sprite = *view.get<CCore::AnimatedSprite>(entity).sprite;
+
+            if (game.input.isKeyPressed(sf::Keyboard::LShift))
+                movement_speed *= 1.5;
 
             sf::Vector2f velocity{};
 
@@ -76,7 +95,12 @@ namespace SPlayer
             if (velocity.x == 0.f && velocity.y == 0.f)
                 animations["idle"]->run(game.dt);
             else
-                animations["walk"]->run(game.dt);
+            {
+                if (default_movement_speed == movement_speed)
+                    animations["walk"]->run(game.dt);
+                else
+                    animations["walk"]->run(sf::seconds(1.5f * game.dt.asSeconds()));
+            }
 
             position += velocity;
 

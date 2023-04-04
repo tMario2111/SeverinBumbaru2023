@@ -6,7 +6,6 @@ GameState::GameState(Game& game) :
     hud{ game.win, game.assets, fibonacci }
 {
     SPlayer::create(game, *this);
-    hud.setScore(0);
 
     // Ghost spawn
     SGhost::spawn(game, *this);
@@ -24,6 +23,8 @@ void GameState::update()
 {
     SPlayer::update(game, *this);
     SGhost::update(game, *this);
+
+    hud.setScore(SPlayer::getScore(game, *this));
 
     updateBatch();
 }
