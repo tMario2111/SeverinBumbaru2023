@@ -24,6 +24,7 @@ namespace SPlayer
         
         auto& movement = registry.emplace<CPlayer::Movement>(entity);
         movement.movement_speed = 500.f; // HARDCODE
+        movement.position = sf::Vector2f{ Map::size_x / 2.f, Map::size_y / 2.f };
     }
 
     void update(Game& game, GameState& game_state)

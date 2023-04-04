@@ -22,8 +22,11 @@ void Game::setupWin()
 
 void Game::loadAssets()
 {
+    assets.loadFont("font", "assets/BigPixelDemo.otf");
+
     assets.loadTexture("background", "assets/background.png");
     assets.getTexture("background").setRepeated(true);
+
     assets.loadAtlas("atlas", "assets/atlas.png");
 }
 

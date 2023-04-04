@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <math.h>
+#include <string>
 
 namespace mke
 {
@@ -106,4 +107,8 @@ namespace mke
 	void centerTextXY(sf::Text& text, float x1, float x2, float y1, float y2);
 
 	bool isOnScreen(const sf::Sprite& sprite, const sf::RenderWindow& win);
+
+	bool isOnScreen(const sf::Text& text, const sf::RenderWindow& win);
+
+	std::string addCommasToNumber(std::string number);
 }

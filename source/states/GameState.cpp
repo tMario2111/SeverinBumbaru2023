@@ -30,4 +30,5 @@ void GameState::render()
 {
     game.win.draw(map);
     game.win.draw(batch, &game.assets.getAtlasTexture("atlas"));
+    SGhost::render(game, *this);
 }

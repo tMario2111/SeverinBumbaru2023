@@ -29,4 +29,10 @@ namespace CGhost
         float move_radius;
         float speed;
     };
+
+    struct Tag
+    {
+        int k;
+        sf::Text text;
+    };
 }

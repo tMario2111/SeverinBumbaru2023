@@ -4,8 +4,8 @@ namespace SGhost
 {
     void spawn(Game& game, GameState& game_state)
     {
-        for (int i = 0; i < 100; i++)
-            create(game, game_state);
+        for (int i = 2; i <= 100; i++)
+            create(game, game_state, i);
     }
 
     void update(Game& game, GameState& game_state)
@@ -26,13 +26,37 @@ namespace SGhost
         }
     }
 
-    void create(Game& game, GameState& game_state)
+    void render(Game& game, GameState& game_state)
+    {
+        auto& registry = game_state.registry;
+
+        auto view = registry.view<CGhost::Tag, CGhost::Base>();
+        for (const auto entity : view)
+        {
+            auto& text = view.get<CGhost::Tag>(entity).text;
+            if (mke::isOnScreen(text, game.win))
+                game.win.draw(text);
+        }
+    }
+
+    void create(Game& game, GameState& game_state, int i)
     {
         auto& registry = game_state.registry;
 
         const auto entity = registry.create();
 
         registry.emplace<CGhost::Base>(entity);
+
+        auto& tag = registry.emplace<CGhost::Tag>(entity);
+        tag.k = i;
+        tag.text.setFont(game.assets.getFont("font"));
+        tag.text.setCharacterSize(20);
+        if (i % 2 == 0)
+            tag.text.setString(mke::addCommasToNumber(std::to_string(game_state.fibonacci.seq[i / 2])));
+        else
+            tag.text.setString(mke::addCommasToNumber(std::to_string(game_state.fibonacci.seq[i / 2] + 
+                game.random.getInt<int>(-10, 10))));
+        tag.text.setOrigin(tag.text.getLocalBounds().width / 2.f, tag.text.getLocalBounds().height / 2.f);
 
         auto& animated_sprite = registry.emplace<CCore::AnimatedSprite>(entity);
         animated_sprite.sprite = std::make_unique<sf::Sprite>();
@@ -90,12 +114,13 @@ namespace SGhost
     {
         auto& registry = game_state.registry;
 
-        auto view = registry.view<CGhost::Base, CGhost::Movement, CCore::AnimatedSprite>();
+        auto view = registry.view<CGhost::Base, CGhost::Movement, CCore::AnimatedSprite, CGhost::Tag>();
         for (const auto entity : view)
         {
             auto& movement = view.get<CGhost::Movement>(entity);
             auto& animations = *view.get<CCore::AnimatedSprite>(entity).animations;
             auto& sprite = *view.get<CCore::AnimatedSprite>(entity).sprite;
+            auto& text = view.get<CGhost::Tag>(entity).text;
 
             animations["walk"]->run(game.dt);
 
@@ -135,6 +160,8 @@ namespace SGhost
                     movement.velocity.y = movement.speed * sinf(angle);
                 }
             }
+
+            text.setPosition(sprite.getPosition().x, sprite.getPosition().y - 40.f);
         }
     }
 }

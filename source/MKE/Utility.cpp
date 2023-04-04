@@ -40,4 +40,24 @@ namespace mke
 		view_rect.height = win.getView().getSize().y;
 		return sprite.getGlobalBounds().intersects(view_rect);
 	}
+
+	bool isOnScreen(const sf::Text& text, const sf::RenderWindow& win)
+	{
+		sf::FloatRect view_rect{};
+		view_rect.left = win.getView().getCenter().x - win.getView().getSize().x / 2;
+		view_rect.top = win.getView().getCenter().y - win.getView().getSize().y / 2;
+		view_rect.width = win.getView().getSize().x;
+		view_rect.height = win.getView().getSize().y;
+		return text.getGlobalBounds().intersects(view_rect);
+	}
+
+	std::string addCommasToNumber(std::string number)
+	{
+		int n = number.length() - 3;
+		while (n > 0) {
+			number.insert(n, ",");
+			n -= 3;
+		}
+		return number;
+	}
 }

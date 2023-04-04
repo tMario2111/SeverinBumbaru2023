@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Map.hpp"
+#include "../Fibonacci.hpp"
 
 #include "../systems/PlayerSystems.hpp"
 #include "../systems/GhostSystems.hpp"
@@ -23,6 +24,7 @@ public:
     Game& game;
     entt::registry registry;
     Map map;
+    Fibonacci fibonacci;
 
     void update() override;
     void render() override;
