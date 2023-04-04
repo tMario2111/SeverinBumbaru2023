@@ -3,6 +3,46 @@
         "idle": {
             "frames": [
                 {
+                    "name": "Steve9",
+                    "duration": 0.1
+                },
+                {
+                    "name": "Steve10",
+                    "duration": 0.1
+                },
+                {
+                    "name": "Steve11",
+                    "duration": 0.1
+                },
+                {
+                    "name": "Steve12",
+                    "duration": 0.1
+                },
+                {
+                    "name": "Steve13",
+                    "duration": 0.1
+                },
+                {
+                    "name": "Steve14",
+                    "duration": 0.1
+                },
+                {
+                    "name": "Steve15",
+                    "duration": 0.1
+                },
+                {
+                    "name": "Steve16",
+                    "duration": 0.1
+                },
+                {
+                    "name": "Steve17",
+                    "duration": 0.1
+                }
+            ]
+        },
+        "walk": {
+            "frames": [
+                {
                     "name": "Steve1",
                     "duration": 0.1
                 },
@@ -28,6 +68,10 @@
                 },
                 {
                     "name": "Steve7",
+                    "duration": 0.1
+                },
+                {
+                    "name": "Steve8",
                     "duration": 0.1
                 }
             ]

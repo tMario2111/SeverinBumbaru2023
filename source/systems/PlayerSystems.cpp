@@ -19,7 +19,7 @@ namespace SPlayer
         animations["idle"]->setSpriteFrame("Steve1");
 
         auto& sprite = animated_sprite.sprite;
-        sprite->setScale(3.f, 3.f); // HARDCODE
+        sprite->setScale(1.75f, 1.75f); // HARDCODE
         sprite->setOrigin(sprite->getLocalBounds().width / 2.f, sprite->getLocalBounds().height / 2.f);
         
         auto& movement = registry.emplace<CPlayer::Movement>(entity);
@@ -73,7 +73,10 @@ namespace SPlayer
                 velocity.y /= mke::SQRT2;
             }
 
-            animations["idle"]->run(game.dt);
+            if (velocity.x == 0.f && velocity.y == 0.f)
+                animations["idle"]->run(game.dt);
+            else
+                animations["walk"]->run(game.dt);
 
             position += velocity;
 
