@@ -30,6 +30,7 @@ public:
     Fibonacci fibonacci;
     HUD hud;
     sf::Time timer = sf::seconds(60.f);
+    sf::Sprite arrow;
 
     bool game_over = false;
 
@@ -38,5 +39,6 @@ public:
 private:
     mke::SpriteBatch batch;
 
+    void setupArrow();
     void updateBatch();
 };

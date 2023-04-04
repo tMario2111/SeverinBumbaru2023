@@ -13,6 +13,7 @@ namespace SGhost
         movement(game, game_state);
         catchGhost(game, game_state);
         killPlayer(game, game_state);
+        arrowMovement(game, game_state);
     }
 
     void drawToBatch(Game& game, GameState& game_state, mke::SpriteBatch& batch)
@@ -39,6 +40,8 @@ namespace SGhost
             if (mke::isOnScreen(text, game.win))
                 game.win.draw(text);
         }
+
+        game.win.draw(game_state.arrow);
     }
 
     void create(Game& game, GameState& game_state, int i)
@@ -239,5 +242,50 @@ namespace SGhost
                 SPlayer::getPlayerSprite(game, game_state), 166))
                 game_state.game_over = true;
         }
+    }
+
+    void arrowMovement(Game& game, GameState& game_state)
+    {
+        sf::Vector2f ghost_position{};
+        {
+            auto view = game_state.registry.view<CGhost::Base, CCore::AnimatedSprite, CGhost::Tag>();
+            for (const auto entity : view)
+            {
+                if (view.get<CGhost::Tag>(entity).k % 2 == 0 && 
+                    view.get<CGhost::Tag>(entity).k / 2 == SPlayer::getScore(game, game_state) + 3)
+                {
+                    ghost_position = view.get<CCore::AnimatedSprite>(entity).sprite->getPosition();
+                    break;
+                }
+            }
+        }
+        auto player_position = SPlayer::getPlayerPosition(game, game_state);
+        auto m1 = player_position.x - ghost_position.x;
+        auto m2 = player_position.y - ghost_position.y;
+        if (fabsf(m1) > fabsf(m2))
+        {
+            if (m1 < 0.f)
+                game_state.arrow.setRotation(0.f);
+            else 
+                game_state.arrow.setRotation(180.f);
+        }
+        else
+        {
+            if (m2 < 0.f)
+                game_state.arrow.setRotation(90.f);
+            else
+                game_state.arrow.setRotation(270.f);
+        }
+        /*
+        if (ghost_position.x > player_position.x)
+            game_state.arrow.setRotation(0.f);
+        else if (ghost_position.y > player_position.y)
+            game_state.arrow.setRotation(90.f);
+        else if (ghost_position.x < player_position.x)
+            game_state.arrow.setRotation(180.f);
+        else
+            game_state.arrow.setRotation(270.f);
+        */
+        game_state.arrow.setPosition(player_position.x, player_position.y - 75.f);
     }
 }

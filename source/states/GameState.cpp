@@ -6,9 +6,17 @@ GameState::GameState(Game& game) :
     hud{ game.win, game.assets, fibonacci }
 {
     SPlayer::create(game, *this);
+    setupArrow();
 
     // Ghost spawn
     SGhost::spawn(game, *this);
+}
+
+void GameState::setupArrow()
+{
+    arrow.setTexture(game.assets.getTexture("arrow"));
+    arrow.setScale(0.1f, 0.1f);
+    arrow.setOrigin(arrow.getLocalBounds().width / 2.f, arrow.getLocalBounds().height / 2.f);
 }
 
 void GameState::updateBatch()
