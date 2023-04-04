@@ -23,12 +23,11 @@ add_executable(SeverinBumbaru2023 main.cpp
     source/states/MainMenuState.hpp source/states/MainMenuState.cpp
     source/states/GameState.hpp source/states/GameState.cpp
 
-    #map
+    #misc
     source/Map.hpp source/Map.cpp
     source/HUD.hpp source/HUD.cpp
-
-    #fibo
     source/Fibonacci.hpp source/Fibonacci.cpp
+    source/Collision.h source/Collision.cpp
 
     #components
     source/components/PlayerComponents.hpp

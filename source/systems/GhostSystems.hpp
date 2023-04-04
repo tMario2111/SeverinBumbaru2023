@@ -5,6 +5,7 @@
 
 #include "../Map.hpp"
 #include "../Fibonacci.hpp"
+#include "../Collision.h"
 
 #include "CoreSystems.hpp"
 
