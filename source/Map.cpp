@@ -9,10 +9,10 @@ Map::Map(mke::AssetManager& assets) :
 
 void Map::setupBackground()
 {
-    background[0].position = sf::Vector2f{ 0.f, 0.f };
-    background[1].position = sf::Vector2f{ map_size_x, 0.f };
-    background[2].position = sf::Vector2f{ map_size_x, map_size_y };
-    background[3].position = sf::Vector2f{ 0.f, map_size_y };
+    background[0].position = sf::Vector2f{ -margin, -margin };
+    background[1].position = sf::Vector2f{ size_x + margin, -margin };
+    background[2].position = sf::Vector2f{ size_x + margin, size_y + margin };
+    background[3].position = sf::Vector2f{ -margin, size_y + margin };
     for (auto i = 0u; i < background.getVertexCount(); i++)
         background[i].texCoords = background[i].position;
 }

@@ -5,6 +5,8 @@
 
 #include "../systems/CoreSystems.hpp"
 
+#include "../Map.hpp"
+
 #include "../core/Game.hpp"
 #include "../states/GameState.hpp"
 

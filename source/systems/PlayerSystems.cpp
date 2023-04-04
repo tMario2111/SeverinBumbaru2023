@@ -19,7 +19,7 @@ namespace SPlayer
         animations["idle"]->setSpriteFrame("Steve1");
 
         auto& sprite = animated_sprite.sprite;
-        sprite->setScale(4.f, 4.f); // HARDCODE
+        sprite->setScale(3.f, 3.f); // HARDCODE
         sprite->setOrigin(sprite->getLocalBounds().width / 2.f, sprite->getLocalBounds().height / 2.f);
         
         auto& movement = registry.emplace<CPlayer::Movement>(entity);
@@ -75,6 +75,9 @@ namespace SPlayer
             animations["idle"]->run(game.dt);
 
             position += velocity;
+
+            position.x = std::clamp(position.x, 0.f, Map::size_x);
+            position.y = std::clamp(position.y, 0.f, Map::size_y);
 
             sprite.setPosition(position);
 
