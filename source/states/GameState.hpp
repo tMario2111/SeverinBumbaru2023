@@ -1,5 +1,7 @@
 #pragma once
 
+#include "GameOverState.hpp"
+
 #include "../Map.hpp"
 #include "../Fibonacci.hpp"
 #include "../HUD.hpp"
@@ -28,6 +30,8 @@ public:
     Fibonacci fibonacci;
     HUD hud;
     sf::Time timer = sf::seconds(60.f);
+
+    bool game_over = false;
 
     void update() override;
     void render() override;

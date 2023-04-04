@@ -1,5 +1,6 @@
 #pragma once
 
+#include "MainMenuState.hpp"
 #include "GameState.hpp"
 
 #include "../core/Game.hpp"
@@ -10,15 +11,18 @@
 
 class Game;
 
-class MainMenuState : public mke::State
+class GameOverState : public mke::State
 {
 public:
-    MainMenuState(Game& game);
+    GameOverState(Game& game);
 
     void update() override;
     void render() override;
 private:
     Game& game;
+
+    bool replay = false;
+    bool exit = false;
 
     void setupGui();
 };

@@ -22,6 +22,7 @@ add_executable(SeverinBumbaru2023 main.cpp
     #states
     source/states/MainMenuState.hpp source/states/MainMenuState.cpp
     source/states/GameState.hpp source/states/GameState.cpp
+    source/states/GameOverState.hpp source/states/GameOverState.cpp
 
     #misc
     source/Map.hpp source/Map.cpp
@@ -43,8 +44,10 @@ add_executable(SeverinBumbaru2023 main.cpp
 find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
 find_package(EnTT CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
+find_package(TGUI CONFIG REQUIRED)
 
 target_link_libraries(SeverinBumbaru2023 PRIVATE
     sfml-system sfml-window sfml-graphics
     EnTT::EnTT
-    nlohmann_json::nlohmann_json)
+    nlohmann_json::nlohmann_json
+    tgui)

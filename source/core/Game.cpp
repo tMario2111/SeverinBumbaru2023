@@ -25,7 +25,7 @@ void Game::loadAssets()
     assets.loadFont("font", "assets/BigPixelDemo.otf");
 
     assets.loadTexture("background", "assets/background.png");
-    assets.getTexture("background").setRepeated(true);
+    // assets.getTexture("background").setRepeated(true);
 
     assets.loadAtlas("atlas", "assets/atlas.png");
 }
@@ -42,6 +42,8 @@ void Game::winEvents()
     for (sf::Event event{}; win.pollEvent(event);)
     {
         input.processEvent(event);
+        if (states.top().gui != nullptr)
+            states.top().gui->handleEvent(event);
         switch (event.type)
         {
         case sf::Event::Closed:
@@ -65,6 +67,8 @@ void Game::run()
 
         win.clear();
         states.top().render();
+        if (states.top().gui != nullptr)
+            states.top().gui->draw();
         win.display();
     }
 }

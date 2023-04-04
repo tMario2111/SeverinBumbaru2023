@@ -17,6 +17,11 @@ void Map::setupBackground()
     background[3].position = sf::Vector2f{ -margin, size_y + margin };
     for (auto i = 0u; i < background.getVertexCount(); i++)
         background[i].texCoords = background[i].position;
+
+    background[0].texCoords = sf::Vector2f{ 0.f, 0.f };
+    background[1].texCoords = sf::Vector2f{ 6000.f, 0.f };
+    background[2].texCoords = sf::Vector2f{ 6000.f, 6000.f };
+    background[3].texCoords = sf::Vector2f{ 0.f, 6000.f };
 }
 
 void Map::setupBorder()

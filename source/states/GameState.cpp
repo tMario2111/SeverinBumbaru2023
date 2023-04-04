@@ -21,6 +21,12 @@ void GameState::updateBatch()
 
 void GameState::update()
 {
+    if (game_over)
+    {
+        game.states.push<GameOverState>(game);
+        return;
+    }
+
     SPlayer::update(game, *this);
     SGhost::update(game, *this);
 
@@ -29,7 +35,7 @@ void GameState::update()
     timer -= game.dt;
     hud.setTimer(timer.asSeconds());
     if (timer.asSeconds() <= 0.f)
-        game.win.close();
+        game_over = true;
 
     updateBatch();
 }

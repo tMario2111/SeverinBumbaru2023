@@ -237,7 +237,7 @@ namespace SGhost
         {
             if (Collision::PixelPerfectTest(*view.get<CCore::AnimatedSprite>(entity).sprite, 
                 SPlayer::getPlayerSprite(game, game_state), 166))
-                game.win.close();
+                game_state.game_over = true;
         }
     }
 }
