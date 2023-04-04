@@ -104,4 +104,6 @@ namespace mke
 	 * @param y2 
 	 */
 	void centerTextXY(sf::Text& text, float x1, float x2, float y1, float y2);
+
+	bool isOnScreen(const sf::Sprite& sprite, const sf::RenderWindow& win);
 }

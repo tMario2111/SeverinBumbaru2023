@@ -17,6 +17,7 @@ add_executable(SeverinBumbaru2023 main.cpp
     source/MKE/Utility.hpp source/MKE/Utility.cpp
     source/MKE/Animation.hpp source/MKE/Animation.cpp
     source/MKE/SpriteBatch source/MKE/SpriteBatch.cpp
+    source/MKE/Random.hpp source/MKE/Random.cpp
 
     #states
     source/states/MainMenuState.hpp source/states/MainMenuState.cpp
@@ -28,10 +29,12 @@ add_executable(SeverinBumbaru2023 main.cpp
     #components
     source/components/PlayerComponents.hpp
     source/components/CoreComponents.hpp
+    source/components/GhostComponents.hpp
 
     #systems
     source/systems/PlayerSystems.hpp source/systems/PlayerSystems.cpp
     source/systems/CoreSystems.hpp source/systems/CoreSystems.cpp
+    source/systems/GhostSystems.hpp source/systems/GhostSystems.cpp
 )
 
 find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)

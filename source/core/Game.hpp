@@ -5,6 +5,7 @@
 #include "../MKE/AssetManager.hpp"
 #include "../MKE/Input.hpp"
 #include "../MKE/StateMachine.hpp"
+#include "../MKE/Random.hpp"
 
 #include "GameData.hpp"
 
@@ -20,6 +21,7 @@ public:
     mke::AssetManager assets;
     mke::Input input;
     mke::StateMachine<> states;
+    mke::Random random;
     GameData data;
 private:
     sf::Clock win_clock;

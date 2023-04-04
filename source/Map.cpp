@@ -17,6 +17,14 @@ void Map::setupBackground()
         background[i].texCoords = background[i].position;
 }
 
+sf::Vector2f Map::getRandomPoint(mke::Random& random)
+{
+    sf::Vector2f pos{};
+    pos.x = random.getReal<float>(0.f, size_x);
+    pos.y = random.getReal<float>(0.f, size_y);
+    return pos;
+}
+
 void Map::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(background, &assets.getTexture("background"));

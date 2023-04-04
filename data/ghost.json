@@ -1,0 +1,48 @@
+{
+    "animations": {
+        "walk": {
+            "frames": [
+                {
+                    "name": "ghost1",
+                    "duration": 0.1
+                },
+                {
+                    "name": "ghost2",
+                    "duration": 0.1
+                },
+                {
+                    "name": "ghost3",
+                    "duration": 0.1
+                },
+                {
+                    "name": "ghost4",
+                    "duration": 0.1
+                },
+                {
+                    "name": "ghost5",
+                    "duration": 0.1
+                },
+                {
+                    "name": "ghost6",
+                    "duration": 0.1
+                },
+                {
+                    "name": "ghost7",
+                    "duration": 0.1
+                },
+                {
+                    "name": "ghost8",
+                    "duration": 0.1
+                },
+                {
+                    "name": "ghost9",
+                    "duration": 0.1
+                },
+                {
+                    "name": "ghost10",
+                    "duration": 0.1
+                }
+            ]
+        }
+    }
+}

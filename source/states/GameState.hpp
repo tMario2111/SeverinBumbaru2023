@@ -3,6 +3,7 @@
 #include "../Map.hpp"
 
 #include "../systems/PlayerSystems.hpp"
+#include "../systems/GhostSystems.hpp"
 
 #include "../core/Game.hpp"
 #include "../MKE/State.hpp"
@@ -21,11 +22,11 @@ public:
 
     Game& game;
     entt::registry registry;
+    Map map;
 
     void update() override;
     void render() override;
 private:
-    Map map;
     mke::SpriteBatch batch;
 
     void updateBatch();

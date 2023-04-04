@@ -80,6 +80,10 @@ namespace SPlayer
             position.y = std::clamp(position.y, 0.f, Map::size_y);
 
             sprite.setPosition(position);
+            if (velocity.x < 0.f)
+                sprite.setScale(-fabsf(sprite.getScale().x), sprite.getScale().y);
+            else if (velocity.x > 0.f)
+                sprite.setScale(+fabsf(sprite.getScale().x), sprite.getScale().y);
 
             auto view = game.win.getView();
             view.setCenter(position);

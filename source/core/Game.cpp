@@ -2,6 +2,7 @@
 
 Game::Game()
 {
+    random.setUniqueSeed();
     setupWin();
     loadAssets();
     setupStates();

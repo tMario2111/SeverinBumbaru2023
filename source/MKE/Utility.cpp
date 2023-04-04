@@ -2,6 +2,11 @@
 
 namespace mke
 {
+	float getRotationToPoint(sf::Vector2f A, sf::Vector2f B)
+	{
+		return atan2f(B.y - A.y, B.x - A.x);
+	}
+
 	void centerTextX(sf::Text& text, float x1, float x2)
 	{
 		sf::Vector2f position{};
@@ -24,5 +29,15 @@ namespace mke
 	{
 		centerTextX(text, x1, x2);
 		centerTextY(text, y1, y2);
+	}
+
+	bool isOnScreen(const sf::Sprite& sprite, const sf::RenderWindow& win)
+	{
+		sf::FloatRect view_rect{};
+		view_rect.left = win.getView().getCenter().x - win.getView().getSize().x / 2;
+		view_rect.top = win.getView().getCenter().y - win.getView().getSize().y / 2;
+		view_rect.width = win.getView().getSize().x;
+		view_rect.height = win.getView().getSize().y;
+		return sprite.getGlobalBounds().intersects(view_rect);
 	}
 }
