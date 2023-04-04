@@ -15,6 +15,7 @@ public:
     HUD(sf::RenderWindow& win, mke::AssetManager& assets, Fibonacci& fibonacci);
 
     void setScore(int score);
+    void setTimer(float seconds);
     void render();
 private:
     sf::RenderWindow& win;

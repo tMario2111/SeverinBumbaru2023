@@ -27,6 +27,7 @@ public:
     Map map;
     Fibonacci fibonacci;
     HUD hud;
+    sf::Time timer = sf::seconds(60.f);
 
     void update() override;
     void render() override;

@@ -169,7 +169,7 @@ namespace SGhost
     {
         auto& registry = game_state.registry;
 
-        if (!game.input.isMouseButtonPressed(sf::Mouse::Left))
+        if (!game.input.isMouseButtonReleased(sf::Mouse::Left))
             return;
 
         const auto mouse_pos = game.win.mapPixelToCoords(sf::Mouse::getPosition(game.win));
@@ -186,7 +186,10 @@ namespace SGhost
                     SPlayer::incrementScore(game, game_state);
                     tag.text.setString(std::to_string(game.random.getInt<unsigned long long>(1000, 1000000)));
                     create(game, game_state, 99);
+                    game_state.timer += sf::seconds(30);
                 }
+                else
+                    game_state.timer -= sf::seconds(5.f);
             }
         }
     }

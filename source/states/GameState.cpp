@@ -26,6 +26,11 @@ void GameState::update()
 
     hud.setScore(SPlayer::getScore(game, *this));
 
+    timer -= game.dt;
+    hud.setTimer(timer.asSeconds());
+    if (timer.asSeconds() <= 0.f)
+        game.win.close();
+
     updateBatch();
 }
 
