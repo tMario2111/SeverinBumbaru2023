@@ -58,6 +58,23 @@ namespace SPlayer
             view.get<CPlayer::Base>(entity).score++;
     }
 
+    sf::Vector2f getPlayerPosition(Game& game, GameState& game_state)
+    {
+        auto view = game_state.registry.view<CPlayer::Base, CCore::AnimatedSprite>();
+        for (const auto entity : view)
+            return view.get<CCore::AnimatedSprite>(entity).sprite->getPosition();
+        return sf::Vector2f{};
+    }
+
+    sf::Sprite& getPlayerSprite(Game& game, GameState& game_state)
+    {
+        sf::Sprite dummy;
+        auto view = game_state.registry.view<CPlayer::Base, CCore::AnimatedSprite>();
+        for (const auto entity : view)
+            return *view.get<CCore::AnimatedSprite>(entity).sprite;
+        return dummy;
+    }
+
     void movement(Game& game, GameState& game_state)
     {
         auto& registry = game_state.registry;

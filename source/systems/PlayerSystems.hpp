@@ -25,6 +25,8 @@ namespace SPlayer
     void drawToBatch(Game& game, GameState& game_state, mke::SpriteBatch& batch);
     int getScore(Game& game, GameState& game_state);
     void incrementScore(Game& game, GameState& game_state);
+    sf::Vector2f getPlayerPosition(Game& game, GameState& game_state);
+    sf::Sprite& getPlayerSprite(Game& game, GameState& game_state);
 
     void movement(Game& game, GameState& game_state);
 }

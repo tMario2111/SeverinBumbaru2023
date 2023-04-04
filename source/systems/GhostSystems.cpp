@@ -12,6 +12,7 @@ namespace SGhost
     {
         movement(game, game_state);
         catchGhost(game, game_state);
+        killPlayer(game, game_state);
     }
 
     void drawToBatch(Game& game, GameState& game_state, mke::SpriteBatch& batch)
@@ -53,9 +54,10 @@ namespace SGhost
         tag.text.setFont(game.assets.getFont("font"));
         tag.text.setCharacterSize(22);
         if (i % 2 == 0)
-            tag.text.setString(std::to_string(game_state.fibonacci.seq[i / 2]));
+            tag.text.setString(mke::addCommasToNumber(std::to_string(game_state.fibonacci.seq[i / 2])));
         else
-            tag.text.setString(std::to_string(game.random.getInt<unsigned long long>(100, 10000000)));
+            tag.text.setString(mke::addCommasToNumber(std::to_string(
+                game.random.getInt<unsigned long long>(100, 10000000))));
         tag.text.setOrigin(tag.text.getLocalBounds().width / 2.f, tag.text.getLocalBounds().height / 2.f);
 
         auto& animated_sprite = registry.emplace<CCore::AnimatedSprite>(entity);
@@ -122,10 +124,9 @@ namespace SGhost
             auto& sprite = *view.get<CCore::AnimatedSprite>(entity).sprite;
             auto& text = view.get<CGhost::Tag>(entity).text;
 
-            animations["walk"]->run(game.dt);
-
             if (movement.state == CGhost::Movement::State::Moving)
             {
+                animations["walk"]->run(game.dt);
                 sprite.move(sf::Vector2f{ movement.velocity.x * game.dt.asSeconds(), 
                     movement.velocity.y * game.dt.asSeconds() });
 
@@ -140,8 +141,9 @@ namespace SGhost
                         movement.max_wait_time.asSeconds()));
                 }
             }
-            else // State::Waiting
+            else if (movement.state == CGhost::Movement::State::Waiting)
             {
+                animations["walk"]->run(game.dt);
                 movement.clock += game.dt;
                 if (movement.clock >= movement.delay)
                 {
@@ -160,11 +162,37 @@ namespace SGhost
                     movement.velocity.y = movement.speed * sinf(angle);
                 }
             }
+            else if (movement.state == CGhost::Movement::State::Bad)
+            {
+                animations["bad_ghost_walk"]->run(game.dt);
+                float direction = 
+                    mke::getRotationToPoint(sprite.getPosition(), SPlayer::getPlayerPosition(game, game_state));
+                
+                sf::Vector2f velocity{};
+                velocity.x = movement.speed * cosf(direction) * game.dt.asSeconds();
+                velocity.y = movement.speed * sinf(direction) * game.dt.asSeconds();
+
+                sprite.move(velocity);
+
+                if (SPlayer::getPlayerPosition(game, game_state).x < sprite.getPosition().x)
+                    sprite.setScale(-fabsf(sprite.getScale().x), sprite.getScale().y);
+                else
+                    sprite.setScale(+fabsf(sprite.getScale().x), sprite.getScale().y);
+            }
+            else // Dying
+            {
+                animations["dying"]->run(game.dt);
+                if (animations["dying"]->getLoopCount() >= 1)
+                {
+                    registry.destroy(entity);
+                    continue;
+                }
+            }
 
             text.setPosition(sprite.getPosition().x, sprite.getPosition().y - 40.f);
         }
     }
-#include <iostream>
+
     void catchGhost(Game& game, GameState& game_state)
     {
         auto& registry = game_state.registry;
@@ -173,24 +201,43 @@ namespace SGhost
             return;
 
         const auto mouse_pos = game.win.mapPixelToCoords(sf::Mouse::getPosition(game.win));
-        auto view = game_state.registry.view<CGhost::Base, CCore::AnimatedSprite, CGhost::Tag>();
+        auto view = game_state.registry.view<CGhost::Base, CCore::AnimatedSprite, CGhost::Tag, CGhost::Movement>();
         for (const auto entity : view)
         {
             auto& sprite = *view.get<CCore::AnimatedSprite>(entity).sprite;
             auto& tag = view.get<CGhost::Tag>(entity);
+            auto& movement = view.get<CGhost::Movement>(entity);
 
             if (sprite.getGlobalBounds().contains(mouse_pos))
             {
                 if (tag.k % 2 == 0 && tag.k / 2 == SPlayer::getScore(game, game_state) + 3)
                 {
                     SPlayer::incrementScore(game, game_state);
-                    tag.text.setString(std::to_string(game.random.getInt<unsigned long long>(1000, 1000000)));
-                    create(game, game_state, 99);
-                    game_state.timer += sf::seconds(30);
+                    game_state.timer += sf::seconds(30.f);
+                    if (game.random.getInt(0, 1) == 0)
+                        movement.state = CGhost::Movement::State::Dying;
+                    else 
+                    {
+                        movement.state = CGhost::Movement::State::Bad;
+                        movement.speed = game.random.getReal<float>(50.f, 200.f);
+                    }
                 }
                 else
                     game_state.timer -= sf::seconds(5.f);
             }
+        }
+    }
+
+    void killPlayer(Game& game, GameState& game_state)
+    {
+        auto& registry = game_state.registry;
+
+        auto view = registry.view<CGhost::Movement, CGhost::Base, CCore::AnimatedSprite>();
+        for (const auto entity : view)
+        {
+            if (Collision::PixelPerfectTest(*view.get<CCore::AnimatedSprite>(entity).sprite, 
+                SPlayer::getPlayerSprite(game, game_state), 166))
+                game.win.close();
         }
     }
 }

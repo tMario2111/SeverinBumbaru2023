@@ -43,6 +43,90 @@
                     "duration": 0.1
                 }
             ]
+        },
+        "dying": {
+            "frames": [
+                {
+                    "name": "ghost11",
+                    "duration": 0.05
+                },
+                {
+                    "name": "ghost12",
+                    "duration": 0.05
+                },
+                {
+                    "name": "ghost13",
+                    "duration": 0.05
+                },
+                {
+                    "name": "ghost14",
+                    "duration": 0.05
+                },
+                {
+                    "name": "ghost15",
+                    "duration": 0.05
+                },
+                {
+                    "name": "ghost16",
+                    "duration": 0.05
+                },
+                {
+                    "name": "ghost17",
+                    "duration": 0.05
+                },
+                {
+                    "name": "ghost18",
+                    "duration": 0.05
+                },
+                {
+                    "name": "ghost19",
+                    "duration": 0.05
+                }
+            ]
+        },
+        "bad_ghost_walk": {
+            "frames": [
+                {
+                    "name": "bad_ghost1",
+                    "duration": 0.1
+                },
+                {
+                    "name": "bad_ghost2",
+                    "duration": 0.1
+                },
+                {
+                    "name": "bad_ghost3",
+                    "duration": 0.1
+                },
+                {
+                    "name": "bad_ghost4",
+                    "duration": 0.1
+                },
+                {
+                    "name": "bad_ghost5",
+                    "duration": 0.1
+                },
+                {
+                    "name": "bad_ghost6",
+                    "duration": 0.1
+                },
+                {
+                    "name": "bad_ghost7",
+                    "duration": 0.1
+                },
+                {
+                    "name": "bad_ghost8",
+                    "duration": 0.1
+                },
+                {
+                    "name": "bad_ghost9",
+                    "duration": 0.1
+                },
+                {
+                    "name": "bad_ghost10",
+                    "duration": 0.1
+                }
+            ]
         }
     }
 }

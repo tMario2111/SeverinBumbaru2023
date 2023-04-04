@@ -28,4 +28,5 @@ namespace SGhost
     void create(Game& game, GameState& game_state, int i);
     void movement(Game& game, GameState& game_state);
     void catchGhost(Game& game, GameState& game_state);
+    void killPlayer(Game& game, GameState& game_state);
 }

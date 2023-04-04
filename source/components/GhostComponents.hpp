@@ -20,7 +20,9 @@ namespace CGhost
         enum State
         {
             Moving,
-            Waiting
+            Waiting,
+            Dying,
+            Bad
         } state = State::Moving;
 
         sf::Vector2f target;
