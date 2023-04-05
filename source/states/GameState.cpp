@@ -5,6 +5,9 @@ GameState::GameState(Game& game) :
     map{ game.assets },
     hud{ game.win, game.assets, fibonacci }
 {
+    game.sounds.getMusicAs("fibonacci").setVolume(50.f);
+    game.sounds.getMusic().play();
+
     SPlayer::create(game, *this);
     setupArrow();
 
@@ -31,6 +34,7 @@ void GameState::update()
 {
     if (game_over)
     {
+        game.sounds.getMusic().stop();
         game.states.push<GameOverState>(game);
         return;
     }

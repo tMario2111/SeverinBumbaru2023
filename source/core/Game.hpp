@@ -6,6 +6,7 @@
 #include "../MKE/Input.hpp"
 #include "../MKE/StateMachine.hpp"
 #include "../MKE/Random.hpp"
+#include "../MKE/SoundManager.hpp"
 
 #include "GameData.hpp"
 
@@ -22,6 +23,7 @@ public:
     mke::Input input;
     mke::StateMachine<> states;
     mke::Random random;
+    mke::SoundManager sounds;
     GameData data;
 private:
     sf::Clock win_clock;

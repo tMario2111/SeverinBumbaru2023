@@ -2,6 +2,7 @@
 
 #include "GameState.hpp"
 #include "StoryState.hpp"
+#include "InstructionsState.hpp"
 
 #include "../core/Game.hpp"
 

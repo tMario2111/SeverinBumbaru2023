@@ -26,6 +26,11 @@ void MainMenuState::setupGui()
     {
         game.states.push<StoryState>(game);
     });
+
+    gui->get<tgui::Button>("instructions_button")->onPress([&]
+    {
+        game.states.push<InstructionsState>(game);
+    });
 }
 
 void MainMenuState::update()

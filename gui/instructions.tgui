@@ -1,0 +1,48 @@
+Picture.Picture1 {
+    Size = (100%, 100%);
+
+    Renderer {
+        Texture = "themes/story.png" NoSmooth;
+        TransparentTexture = false;
+    }
+}
+
+Label.Label1 {
+    Position = (4%, 7%);
+    Size = (90%, 80%);
+    Text = ""The purpose of \"Fibonacci's Evolution\" is for the player to guide Leonardo, the ghostbuster, through a creepy dungeon in search of ghosts to capture and absorb; The catch is that the ghosts must have strengths that are consecutive numbers in the Fibonacci sequence;
+\nInstructions:
+\n-> The player can control Leonardo using W,A,S,D to move around the map; He must dodge the ghosts, otherwise he will die; 
+\n-> To succeed in the game, the player must guide Leonardo to determine the next number in the Fibonacci sequence and then locate the ghost with the corresponding strength;
+\n-> To make the game easier, he can follow the golden arrow; The arrow indicates the whereabouts of the next ghost;";
+
+    TextSize = 24;
+
+    Renderer {
+        BackgroundColor = transparent;
+        BorderColor = #3C3C3C;
+        Borders = (0, 0, 0, 0);
+        TextColor = #ffffff;
+        TextureBackground = None;
+        Font = "../assets/BigPixelDemo.otf"
+    }
+}
+
+Button.back_button {
+    Position = (40%, 90%);
+    Size = (20%, 5%);
+    Text = Back;
+    TextSize = 19;
+
+    Renderer {
+        TextColor = rgb(100, 100, 100);
+        Texture = "themes/BabyBlue.png" Part(269, 40, 90, 60) Middle(30, 0, 30, 60) Smooth;
+        TextureDisabled = None;
+        TextureDown = "themes/BabyBlue.png" Part(177, 40, 90, 60) Middle(30, 0, 30, 60) Smooth;
+        TextureDownFocused = None;
+        TextureDownHover = None;
+        TextureFocused = None;
+        TextureHover = "themes/BabyBlue.png" Part(361, 40, 90, 60) Middle(30, 0, 30, 60) Smooth;
+        Font = "../assets/BigPixelDemo.otf"
+    }
+}

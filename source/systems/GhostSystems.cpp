@@ -226,6 +226,7 @@ namespace SGhost
                     {
                         movement.state = CGhost::Movement::State::Dying;
                         create(game, game_state, 99); // Random odd number
+                        create(game, game_state, 99); // Random odd number
                     }
                     else 
                     {

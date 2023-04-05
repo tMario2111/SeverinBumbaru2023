@@ -3,6 +3,7 @@
 Game::Game()
 {
     random.setUniqueSeed();
+
     setupWin();
     loadAssets();
     setupStates();
@@ -15,7 +16,7 @@ void Game::setupWin()
     sf::VideoMode video_mode{};
     video_mode = sf::VideoMode::getDesktopMode();
     video_mode.height++;
-    win.create(video_mode, "Severin Bumbaru 2023", sf::Style::None);
+    win.create(video_mode, "Fibonacci's evolution", sf::Style::None);
     win.setFramerateLimit(0);
     win.setVerticalSyncEnabled(true);
 }
@@ -30,6 +31,9 @@ void Game::loadAssets()
     assets.loadAtlas("atlas", "assets/atlas.png");
 
     assets.loadTexture("arrow", "assets/arrow.png");
+
+    sounds.setMusicFilename("fibonacci", "assets/fibonacci_song.wav");
+    sounds.getMusic().setLoop(true);
 }
 
 void Game::setupStates()
