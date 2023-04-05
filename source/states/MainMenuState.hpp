@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameState.hpp"
+#include "StoryState.hpp"
 
 #include "../core/Game.hpp"
 

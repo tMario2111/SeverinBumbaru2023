@@ -10,33 +10,58 @@ Renderer.1 {
     Font = "../assets/BigPixelDemo.otf"
 }
 
+Picture.Picture1 {
+    Size = (100%, 100%);
+
+    Renderer {
+        Texture = "themes/menu.png" NoSmooth;
+        TransparentTexture = false;
+    }
+}
+
 Button.play_button {
-    Position = (40%, 50%);
+    Position = (40%, 45%);
     Renderer = &1;
     Size = (20%, 5%);
     Text = Play;
-    TextSize = 13;
+    TextSize = 18;
+}
+
+Button.story_button {
+    Position = (40%, 55%);
+    Renderer = &1;
+    Size = (20%, 5%);
+    Text = Story;
+    TextSize = 18;
+}
+
+Button.instructions_button {
+    Position = (40%, 65%);
+    Renderer = &1;
+    Size = (20%, 5%);
+    Text = Instructions;
+    TextSize = 18;
 }
 
 Button.exit_button {
-    Position = (40%, 60%);
+    Position = (40%, 75%);
     Renderer = &1;
     Size = (20%, 5%);
     Text = Exit;
-    TextSize = 13;
+    TextSize = 18;
 }
 
 Label.title_label {
-    Position = (32%, 20%);
-    Size = (800, 12.5%);
+    Position = (27.5%, 15%);
+    Size = (1250, 12.5%);
     Text = "Fibonacci's Evolution";
-    TextSize = 50;
+    TextSize = 60;
 
     Renderer {
         BackgroundColor = transparent;
-        BorderColor = #3C3C3C;
+        BorderColor = #000000;
         Borders = (0, 0, 0, 0);
-        TextColor = #3C3C3C;
+        TextColor = #000000;
         TextureBackground = None;
         Font = "../assets/BigPixelDemo.otf"
     }

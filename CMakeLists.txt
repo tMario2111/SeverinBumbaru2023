@@ -23,6 +23,7 @@ add_executable(SeverinBumbaru2023 main.cpp
     source/states/MainMenuState.hpp source/states/MainMenuState.cpp
     source/states/GameState.hpp source/states/GameState.cpp
     source/states/GameOverState.hpp source/states/GameOverState.cpp
+    source/states/StoryState.hpp source/states/StoryState.cpp
 
     #misc
     source/Map.hpp source/Map.cpp
