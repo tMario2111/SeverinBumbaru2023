@@ -1,5 +1,7 @@
 Optimal resolution: 1920x1080
 
+**Instructions:**
+
 The purpose of "Fibonacci's Evolution" is for the player to guide Leonardo, the ghostbuster, through a creepy dungeon in search of ghosts to capture and absorb; The catch is that the ghosts must have strengths that are consecutive numbers in the Fibonacci sequence;
 Instructions:
 
@@ -8,6 +10,9 @@ Instructions:
 -> To succeed in the game, the player must guide Leonardo to determine the next number in the Fibonacci sequence and then locate the ghost with the corresponding strength;
 
 -> To make the game easier, he can follow the golden arrow; The arrow indicates the whereabouts of the next ghost;
+
+
+**Storyline:**
 
 Once upon a time, in a mysterious dungeon deep beneath the earth's surface, there was a legendary ghostbuster named Leonardo; He had the extraordinary ability to absorb the spirits of the ghosts he caught, and through this process, he could evolve into a more powerful being;
 
