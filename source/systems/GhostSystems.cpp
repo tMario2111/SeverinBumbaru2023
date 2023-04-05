@@ -223,7 +223,10 @@ namespace SGhost
                     SPlayer::incrementScore(game, game_state);
                     game_state.timer += sf::seconds(15.f);
                     if (game.random.getInt(0, 1) == 0)
+                    {
                         movement.state = CGhost::Movement::State::Dying;
+                        create(game, game_state, 99); // Random odd number
+                    }
                     else 
                     {
                         movement.state = CGhost::Movement::State::Bad;
