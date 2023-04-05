@@ -1,3 +1,4 @@
+#Team: SeePlusPlus
 Optimal resolution: 1920x1080
 
 **Instructions:**
