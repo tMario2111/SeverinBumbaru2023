@@ -138,12 +138,16 @@ namespace SGhost
                     sprite.setScale(-fabsf(sprite.getScale().x), sprite.getScale().y);
                 else
                     sprite.setScale(+fabsf(sprite.getScale().x), sprite.getScale().y);
-                if (mke::squaredDistance(sprite.getPosition(), movement.target) <= 25.f)
+                if (mke::squaredDistance(sprite.getPosition(), movement.target) <= 100.f)
                 {
                     movement.state = CGhost::Movement::State::Waiting;
                     movement.delay = sf::seconds(game.random.getReal<float>(movement.min_wait_time.asSeconds(), 
                         movement.max_wait_time.asSeconds()));
                 }
+                if (sprite.getPosition().x <= -2 * Map::margin || sprite.getPosition().y <= -2 * Map::margin ||
+                    sprite.getPosition().x >= Map::size_x + 2 * Map::margin || 
+                    sprite.getPosition().y >= Map::size_y + 2 * Map::margin)
+                        sprite.setPosition(movement.target);
             }
             else if (movement.state == CGhost::Movement::State::Waiting)
             {
@@ -217,7 +221,7 @@ namespace SGhost
                 if (tag.k % 2 == 0 && tag.k / 2 == SPlayer::getScore(game, game_state) + 3)
                 {
                     SPlayer::incrementScore(game, game_state);
-                    game_state.timer += sf::seconds(30.f);
+                    game_state.timer += sf::seconds(15.f);
                     if (game.random.getInt(0, 1) == 0)
                         movement.state = CGhost::Movement::State::Dying;
                     else 
@@ -277,16 +281,7 @@ namespace SGhost
             else
                 game_state.arrow.setRotation(270.f);
         }
-        /*
-        if (ghost_position.x > player_position.x)
-            game_state.arrow.setRotation(0.f);
-        else if (ghost_position.y > player_position.y)
-            game_state.arrow.setRotation(90.f);
-        else if (ghost_position.x < player_position.x)
-            game_state.arrow.setRotation(180.f);
-        else
-            game_state.arrow.setRotation(270.f);
-        */
+
         game_state.arrow.setPosition(player_position.x, player_position.y - 75.f);
 
         if (mke::squaredDistance(ghost_position, player_position) <= mke::pow2(1200.f))
